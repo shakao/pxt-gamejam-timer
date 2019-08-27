@@ -29,14 +29,21 @@ namespace gamejam {
     }
 
     //% blockId=setdebug block="set debug loop %on"
-    //% on.shadow=toggleonoff
+    //% on.shadow=toggleOnOff
     //% weight=80
     export function setDebug(on: boolean): void {
         _debug = on;
     }
 
-    //% blockId=showtext block="show instruction %s"
-    export function showText(s: string): scene.Renderable {
+    //% blockId=showtext block="show instruction %s for %duration=200 ms"
+    //% weight=80
+    export function showInstruction(s: string, duration: number): void {
+        let r = showText(s);
+        pause(duration);
+        r.destroy();
+    }
+
+    function showText(s: string): scene.Renderable {
         return scene.createRenderable(scene.HUD_Z, function (target: Image, camera: scene.Camera) {
             target.printCenter(s, 0);
         })
