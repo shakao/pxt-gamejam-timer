@@ -1,7 +1,7 @@
 /**
  * Game lifecycle blocks for 5-second games
  */
-//% weight=100 color=#2ac9ac icon="\uf188"
+//% weight=100 color=#2FBFAE icon="\uf188"
 namespace gamejam {
     let _win: boolean;
     let _debug: boolean;
@@ -54,7 +54,8 @@ namespace gamejam {
      * @param text string to display on the screen
      * @param duration length of time to display the string
      */
-    //% blockId=showtext block="show instruction %s for %duration=200 ms"
+    //% blockId=showtext block="show instruction %s for %duration ms"
+    //% duration.defl=200
     //% weight=80
     export function showInstruction(text: string, duration: number): void {
         let renderable = showText(text);
