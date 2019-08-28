@@ -104,7 +104,7 @@ namespace gamejam {
                 let x = (target.width - ((text.length - 0.5) * _font.charWidth)) / 2;
                 let y = (target.height / 2) - (_font.charHeight / 2);
 
-                printShadow(target, text, x, y, 16, _font);
+                printBorder(target, text, x, y, 12, _font);
                 target.print(text, x, y, 0, _font);
             })
     }
