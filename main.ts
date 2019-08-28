@@ -10,6 +10,8 @@ namespace gamejam {
     function init() {
         _win = false;
         _debug = true;
+
+        game.pushScene();
         info.startCountdown(5);
         info.onCountdownEnd(end); // game.onGameOver(end);
     }
@@ -49,6 +51,8 @@ namespace gamejam {
      */
     function end(): void {
         control.runInParallel(function () {
+            screen.fillRect(0, 0, screen.width, screen.height, 16);
+
             let r: scene.Renderable;
             if (_win) {
                 // move to next game
@@ -58,6 +62,8 @@ namespace gamejam {
             }
             pause(750);
             r.destroy();
+            game.popScene();
+
             if (_debug) control.reset();
         })
     }
