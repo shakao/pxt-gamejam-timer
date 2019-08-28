@@ -51,7 +51,11 @@ namespace gamejam {
      */
     function end(): void {
         control.runInParallel(function () {
-            screen.fillRect(0, 0, screen.width, screen.height, 16);
+            scene.createRenderable(
+                scene.HUD_Z - 1,
+                function (target: Image, camera: scene.Camera) {
+                    target.fillRect(0, 0, target.width, target.height, 16);
+                })
 
             let r: scene.Renderable;
             if (_win) {
