@@ -54,18 +54,16 @@ namespace gamejam {
             scene.createRenderable(
                 scene.HUD_Z - 1,
                 function (target: Image, camera: scene.Camera) {
-                    target.fillRect(0, 0, target.width, target.height, 16);
+                    target.fillRect(0, 0, target.width, target.height, 11);
                 })
 
-            let r: scene.Renderable;
             if (_win) {
                 // move to next game
-                r = showText("WIN");
+                showText("WIN");
             } else {
-                r = showText("LOSE");
+                showText("LOSE");
             }
             pause(750);
-            r.destroy();
             game.popScene();
 
             if (_debug) control.reset();
