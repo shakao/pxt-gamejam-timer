@@ -5,6 +5,7 @@
 namespace gamejam {
     let _win: boolean;
     let _debug: boolean;
+    let _font = image.scaledFont(image.font5, 2);
 
     function init() {
         _win = false;
@@ -13,19 +14,11 @@ namespace gamejam {
         info.onCountdownEnd(end); // game.onGameOver(end);
     }
 
-    /**
-     * Block for starting a 5-second game. Starts the timer and sets
-     * up handlers for when the game ends.
-     * @param body code to execute at the start of the game
-     */
-    //% help=game/on-update weight=100 afterOnStart=true
-    //% blockId=timestart block="on game start"
-    //% blockAllowMultiple=1
-    export function start(body: () => void): void {
-        init();
-        if (!body) return;
-        body();
-    }
+    ///////////////////////////////////////////////////////////////////////////
+    /////////////////                                         /////////////////
+    /////////////////           LIFECYCLE FUNCTIONS           /////////////////
+    /////////////////                                         /////////////////
+    ///////////////////////////////////////////////////////////////////////////
 
     /**
      * Updates the win state. When the timer expires, if this win state
@@ -50,6 +43,32 @@ namespace gamejam {
     }
 
     /**
+     * Handler for ending the game, called automatically after five seconds
+     * has elapsed. Will display "WIN" or "LOSE" text for game development
+     * purposes. (In the final collaborative game, this may look different.)
+     */
+    function end(): void {
+        control.runInParallel(function () {
+            let r: scene.Renderable;
+            if (_win) {
+                // move to next game
+                r = showText("WIN");
+            } else {
+                r = showText("LOSE");
+            }
+            pause(750);
+            r.destroy();
+            if (_debug) control.reset();
+        })
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    /////////////////                                         /////////////////
+    /////////////////              TEXT FUNCTIONS             /////////////////
+    /////////////////                                         /////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    /**
      * Displays text above the game for a length of time.
      * @param text string to display on the screen
      * @param duration length of time to display the string
@@ -72,29 +91,30 @@ namespace gamejam {
         return scene.createRenderable(
             scene.HUD_Z,
             function (target: Image, camera: scene.Camera) {
-                target.printCenter(text, 0);
+                let x = (target.width - ((text.length - 0.5) * _font.charWidth)) / 2;
+                let y = (target.height / 2) - (_font.charHeight / 2);
+
+                printShadow(target, text, x, y, 16, _font);
+                target.print(text, x, y, 0, _font);
             })
     }
 
-    /**
-     * Handler for ending the game, called automatically after five seconds
-     * has elapsed. Will display "WIN" or "LOSE" text for game development
-     * purposes. (In the final collaborative game, this may look different.)
-     */
-    function end(): void {
-        control.runInParallel(function () {
-            let r: scene.Renderable;
-            if (_win) {
-                // move to next game
-                r = showText("WIN");
-            } else {
-                r = showText("LOSE");
+    function printBorder(img: Image, txt: string, x: number, y: number, c: number, f: image.Font) {
+        for (let i = -1; i <= 1; i++) {
+            for (let j = -1; j <= 1; j++) {
+                img.print(txt, x + i * 2, y + j * 2, c, f);
             }
-            pause(750);
-            r.destroy();
-            if (_debug) control.reset();
-        })
+        }
     }
 
+    function printShadow(img: Image, txt: string, x: number, y: number, c: number, f: image.Font, up?: boolean, left?: boolean) {
+        for (let i = (left ? -1 : 0); i <= (left ? 0 : 1); i++) {
+            for (let j = (up ? -1 : 0); j <= (up ? 0 : 1); j++) {
+                img.print(txt, x + i * 2, y + j * 2, c, f);
+            }
+        }
+    }
+
+    // Initialize a five-second timer. The game will end when the time expires.
     init();
 }
