@@ -13,7 +13,8 @@ namespace gamejam {
 
         game.pushScene();
         info.startCountdown(5);
-        info.onCountdownEnd(end); // game.onGameOver(end);
+        info.onCountdownEnd(end);
+        game.onGameOver(end);
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -25,11 +26,12 @@ namespace gamejam {
     /**
      * Updates the win state. When the timer expires, if this win state
      * has not been set, the player loses the game.
+     * @param playerWin whether the player has one or lost the game, eg: true
      */
-    //% blockId=timeelapsed block="win game!"
+    //% blockId=timeelapsed block="%playerWin=toggleWinLose game!"
     //% weight=80
-    export function win(): void {
-        _win = true;
+    export function win(playerWin: boolean = true): void {
+        _win = playerWin;
     }
 
     /**
@@ -49,7 +51,11 @@ namespace gamejam {
      * has elapsed. Will display "WIN" or "LOSE" text for game development
      * purposes. (In the final collaborative game, this may look different.)
      */
-    function end(): void {
+    function end(win?: boolean): void {
+        if (win !== undefined) {
+            info.stopCountdown();
+            _win = win;
+        }
         control.runInParallel(function () {
             scene.createRenderable(
                 scene.HUD_Z - 1,
