@@ -13,7 +13,8 @@ namespace gamejam {
 
         game.pushScene();
         info.startCountdown(5);
-        info.onCountdownEnd(end); // game.onGameOver(end);
+        info.onCountdownEnd(end);
+        game.onGameOver(end);
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -25,10 +26,12 @@ namespace gamejam {
     /**
      * Updates the win state. When the timer expires, if this win state
      * has not been set, the player loses the game.
+     * @param win whether the player has one or lost the game
      */
-    //% blockId=timeelapsed block="win game!"
+    //% blockId=timeelapsed block="%win=toggleWinLose game!"
+    //% win.defl=true
     //% weight=80
-    export function win(): void {
+    export function win(win: boolean = true): void {
         _win = true;
     }
 
