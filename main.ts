@@ -53,10 +53,10 @@ namespace gamejam {
      */
     function end(win?: boolean): void {
         if (win !== undefined) {
+            info.stopCountdown();
             _win = win;
         }
         control.runInParallel(function () {
-            info.stopCountdown();
             scene.createRenderable(
                 scene.HUD_Z - 1,
                 function (target: Image, camera: scene.Camera) {
