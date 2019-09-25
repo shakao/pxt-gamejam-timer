@@ -1,6 +1,6 @@
 {
     "name": "pxt-gamejam-timer",
-    "version": "0.0.14",
+    "version": "0.0.15",
     "description": "Blocks for the 5-second-game Arcade jam.",
     "dependencies": {
         "device": "*",
