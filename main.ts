@@ -94,7 +94,9 @@ namespace gamejam {
                 if (_current < (_scenes.length - 1)) {
                     _current += 1;
                     showInstruction("WIN", 750);
+                    _win = false;
                     storyboard.replace(_scenes[_current]);
+                    start();
                 } else {
                     showInstruction("DONE", 750);
                 }
