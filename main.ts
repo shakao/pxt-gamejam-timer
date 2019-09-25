@@ -5,8 +5,8 @@
 namespace gamejam {
     let _win: boolean;
     let _debug: boolean;
-    let _scenes: string[];
     let _current: number;
+    let _scenes: string[] = [];
     let _font = image.scaledFont(image.font5, 2);
 
 
