@@ -20,9 +20,9 @@ namespace gamejam {
         _current = 0;
         console.log(_current + " " + _scenes.length)
         if (_current < _scenes.length - 1) {
-            storyboard.push(_scenes[_current]);
             start();
             console.log("started")
+            storyboard.push(_scenes[_current]);
         }
     }
 
