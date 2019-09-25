@@ -29,6 +29,7 @@ namespace gamejam {
     }
 
     export function start() {
+        console.log("countdown started")
         info.startCountdown(5);
         info.onCountdownEnd(end);
         game.onGameOver(end);
@@ -92,16 +93,15 @@ namespace gamejam {
                 // move to next game
                 if (_current < (_scenes.length - 1)) {
                     _current += 1;
-                    showText("WIN");
-                    pause(750);
+                    showInstruction("WIN", 750);
                     storyboard.replace(_scenes[_current]);
                 } else {
-                    showText("DONE");
+                    showInstruction("DONE", 750);
                 }
             } else {
-                showText("LOSE");
-                pause(750);
+                showInstruction("LOSE", 750);
                 storyboard.pop();
+                console.log("curr " + _current);
                 storyboard.push(_scenes[_current]);
                 start();
             }
