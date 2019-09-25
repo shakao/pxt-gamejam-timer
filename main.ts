@@ -17,7 +17,10 @@ namespace gamejam {
     ///////////////////////////////////////////////////////////////////////////
 
     export function init() {
-        if (_current < _scenes.length - 1) storyboard.push(_scenes[_current]);
+        if (_current < _scenes.length - 1) {
+            storyboard.push(_scenes[_current]);
+            start();
+        }
     }
 
     export function start() {
@@ -70,6 +73,8 @@ namespace gamejam {
      * purposes. (In the final collaborative game, this may look different.)
      */
     function end(win?: boolean): void {
+        console.log("end")
+        console.log(win)
         if (win !== undefined) {
             info.stopCountdown();
             _win = win;
