@@ -17,6 +17,7 @@ namespace gamejam {
     ///////////////////////////////////////////////////////////////////////////
 
     export function init() {
+        _current = 0;
         console.log(_current + " " + _scenes.length)
         if (_current < _scenes.length - 1) {
             storyboard.push(_scenes[_current]);
@@ -28,7 +29,6 @@ namespace gamejam {
     export function start() {
         _win = false;
         _debug = true;
-        _current = 0;
 
         info.startCountdown(5);
         info.onCountdownEnd(end);
