@@ -16,12 +16,15 @@ namespace gamejam {
     /////////////////                                         /////////////////
     ///////////////////////////////////////////////////////////////////////////
 
+    export function init() {
+        if (_current < _scenes.length - 1) storyboard.push(_scenes[_current]);
+    }
+
     export function start() {
         _win = false;
         _debug = true;
         _current = 0;
 
-        if (_current < _scenes.length - 1) storyboard.push(_scenes[_current]);
         info.startCountdown(5);
         info.onCountdownEnd(end);
         game.onGameOver(end);
@@ -83,8 +86,8 @@ namespace gamejam {
                 _current += 1;
             } else {
                 showText("LOSE");
-                pause(750);
             }
+            pause(750);
             storyboard.replace(_scenes[_current]);
             start();
 
