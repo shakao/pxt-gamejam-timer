@@ -17,19 +17,18 @@ namespace gamejam {
     ///////////////////////////////////////////////////////////////////////////
 
     export function init() {
+        _win = false;
+        _debug = true;
         _current = 0;
         console.log(_current + " " + _scenes.length)
         if (_current < _scenes.length - 1) {
-            start();
             console.log("started")
             storyboard.push(_scenes[_current]);
+            start();
         }
     }
 
     export function start() {
-        _win = false;
-        _debug = true;
-
         info.startCountdown(5);
         info.onCountdownEnd(end);
         game.onGameOver(end);
