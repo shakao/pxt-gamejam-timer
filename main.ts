@@ -88,9 +88,14 @@ namespace gamejam {
                     target.fillRect(0, 0, target.width, target.height, 11);
                 })
 
-            if (_win && _current < (_scenes.length - 2)) {
+            if (_win) {
                 // move to next game
-                _current += 1;
+                if (_current < (_scenes.length - 1)) {
+                    _current += 1;
+                    showText("WIN");
+                } else {
+                    showText("DONE");
+                }
             } else {
                 showText("LOSE");
             }
