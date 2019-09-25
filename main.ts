@@ -93,15 +93,18 @@ namespace gamejam {
                 if (_current < (_scenes.length - 1)) {
                     _current += 1;
                     showText("WIN");
+                    pause(750);
+                    storyboard.replace(_scenes[_current]);
                 } else {
                     showText("DONE");
                 }
             } else {
                 showText("LOSE");
+                pause(750);
+                storyboard.pop();
+                storyboard.push(_scenes[_current]);
+                start();
             }
-            pause(750);
-            storyboard.replace(_scenes[_current]);
-            start();
 
             // if (_debug) control.reset();
         })
