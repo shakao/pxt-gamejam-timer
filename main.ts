@@ -21,7 +21,7 @@ namespace gamejam {
         _debug = true;
         _current = 0;
 
-        storyboard.push(_scenes[_current]);
+        if (_current < _scenes.length - 1) storyboard.push(_scenes[_current]);
         info.startCountdown(5);
         info.onCountdownEnd(end);
         game.onGameOver(end);
