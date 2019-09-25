@@ -17,9 +17,11 @@ namespace gamejam {
     ///////////////////////////////////////////////////////////////////////////
 
     export function init() {
+        console.log(_current + " " + _scenes.length)
         if (_current < _scenes.length - 1) {
             storyboard.push(_scenes[_current]);
             start();
+            console.log("started")
         }
     }
 
@@ -52,6 +54,7 @@ namespace gamejam {
     //% blockId=timeelapsed block="%playerWin=toggleWinLose game!"
     //% weight=80
     export function win(playerWin: boolean = true): void {
+        console.log(playerWin)
         _win = playerWin;
     }
 
@@ -74,7 +77,7 @@ namespace gamejam {
      */
     function end(win?: boolean): void {
         console.log("end")
-        console.log(win)
+        console.log(win + ' ' + _win)
         if (win !== undefined) {
             info.stopCountdown();
             _win = win;
