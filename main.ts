@@ -5,16 +5,31 @@
 namespace gamejam {
     let _win: boolean;
     let _debug: boolean;
+    let _scenes: string[];
+    let _current: number;
     let _font = image.scaledFont(image.font5, 2);
 
-    function init() {
+
+    ///////////////////////////////////////////////////////////////////////////
+    /////////////////                                         /////////////////
+    /////////////////             SCENE FUNCTIONS             /////////////////
+    /////////////////                                         /////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    export function start() {
         _win = false;
         _debug = true;
+        _current = 0;
 
-        game.pushScene();
+        storyboard.push(_scenes[_current]);
         info.startCountdown(5);
         info.onCountdownEnd(end);
         game.onGameOver(end);
+    }
+
+    export function register(name: string, cb:() => any) {
+        _scenes.push(name)
+        storyboard.registerScene(name, cb)
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -63,16 +78,17 @@ namespace gamejam {
                     target.fillRect(0, 0, target.width, target.height, 11);
                 })
 
-            if (_win) {
+            if (_win && _current < (_scenes.length - 2)) {
                 // move to next game
-                showText("WIN");
+                _current += 1;
             } else {
                 showText("LOSE");
+                pause(750);
             }
-            pause(750);
-            game.popScene();
+            storyboard.replace(_scenes[_current]);
+            start();
 
-            if (_debug) control.reset();
+            // if (_debug) control.reset();
         })
     }
 
@@ -130,5 +146,5 @@ namespace gamejam {
     }
 
     // Initialize a five-second timer. The game will end when the time expires.
-    init();
+    // init();
 }
