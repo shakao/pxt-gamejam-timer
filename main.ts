@@ -90,7 +90,7 @@ namespace gamejam {
                 // move to next game
                 if (_current < (_scenes.length - 1)) {
                     _current += 1;
-                    showInstruction(_winStr[Math.round(Math.random() * _winStr.length - 1)], 750);
+                    showInstruction(_winStr[Math.round(Math.random() * (_winStr.length - 1))], 750);
                     _win = false;
                     storyboard.replace(_scenes[_current]);
                     start();
@@ -98,7 +98,7 @@ namespace gamejam {
                     showInstruction("YOU WIN! :)", 750);
                 }
             } else {
-                showInstruction(_loseStr[Math.round(Math.random() * _loseStr.length - 1)], 750);
+                showInstruction(_loseStr[Math.round(Math.random() * (_loseStr.length - 1))], 750);
                 storyboard.pop();
                 storyboard.push(_scenes[_current]);
                 start();
