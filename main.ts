@@ -9,6 +9,9 @@ namespace gamejam {
     let _scenes: string[] = [];
     let _font = image.scaledFont(image.font5, 2);
 
+    let _winStr = ["GOOD JOB", "WIN!", "NICE", "GREAT", "WOW!", "HOORAY", ":)"];
+    let _loseStr = ["TRY AGAIN", "OH NO", ":(", "REDO?", "WHOOPS", "GO AGAIN?"];
+
 
     ///////////////////////////////////////////////////////////////////////////
     /////////////////                                         /////////////////
@@ -20,16 +23,13 @@ namespace gamejam {
         _win = false;
         _debug = true;
         _current = 0;
-        console.log(_current + " " + _scenes.length)
         if (_current < _scenes.length - 1) {
-            console.log("started")
             storyboard.push(_scenes[_current]);
             start();
         }
     }
 
     export function start() {
-        console.log("countdown started")
         info.startCountdown(5);
         info.onCountdownEnd(end);
         game.onGameOver(end);
@@ -54,7 +54,6 @@ namespace gamejam {
     //% blockId=timeelapsed block="%playerWin=toggleWinLose game!"
     //% weight=80
     export function win(playerWin: boolean = true): void {
-        console.log(playerWin)
         _win = playerWin;
     }
 
@@ -76,8 +75,6 @@ namespace gamejam {
      * purposes. (In the final collaborative game, this may look different.)
      */
     function end(win?: boolean): void {
-        console.log("end")
-        console.log(win + ' ' + _win)
         if (win !== undefined) {
             info.stopCountdown();
             _win = win;
@@ -93,17 +90,16 @@ namespace gamejam {
                 // move to next game
                 if (_current < (_scenes.length - 1)) {
                     _current += 1;
-                    showInstruction("WIN", 750);
+                    showInstruction(_winStr[Math.round(Math.random() * _winStr.length - 1)], 750);
                     _win = false;
                     storyboard.replace(_scenes[_current]);
                     start();
                 } else {
-                    showInstruction("DONE", 750);
+                    showInstruction("YOU WIN! :)", 750);
                 }
             } else {
-                showInstruction("LOSE", 750);
+                showInstruction(_loseStr[Math.round(Math.random() * _loseStr.length - 1)], 750);
                 storyboard.pop();
-                console.log("curr " + _current);
                 storyboard.push(_scenes[_current]);
                 start();
             }
