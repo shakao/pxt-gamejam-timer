@@ -14,6 +14,12 @@
         "test.ts"
     ],
     "public": false,
-    "preferredEditor": "tsprj",
-    "installedVersion": "workspace:716e5063-d720-4389-ae89-6d8ea70328b1"
+    "targetVersions": {
+        "target": "1.2.16",
+        "targetId": "arcade"
+    },
+    "supportedTargets": [
+        "arcade"
+    ],
+    "preferredEditor": "tsprj"
 }

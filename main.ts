@@ -75,6 +75,7 @@ namespace gamejam {
      * purposes. (In the final collaborative game, this may look different.)
      */
     function end(win?: boolean): void {
+        music.stopAllSounds();
         if (win !== undefined) {
             info.stopCountdown();
             _win = win;
