@@ -23,7 +23,7 @@ namespace gamejam {
         _win = false;
         _debug = true;
         _current = 0;
-        if (_current < _scenes.length - 1) {
+        if (_current <= _scenes.length - 1) {
             storyboard.push(_scenes[_current]);
             start();
         }
